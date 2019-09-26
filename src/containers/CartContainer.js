@@ -6,6 +6,7 @@ import CartItem from './../components/CartItem'
 import * as Message from './../constants/Message'
 import CartResult from '../components/CartResult';
 
+
 class CartContainer extends React.Component {
     showCartItem = (cart) => {
         var result = Message.MSG_CART_IS_EMPTY;
@@ -23,8 +24,8 @@ class CartContainer extends React.Component {
 
     showTotalAmount = (cart) => {
         var result = null;
-        if(cart.length >0){
-            result = <CartResult cart={cart}/>
+        if (cart.length > 0) {
+            result = <CartResult cart={cart} />
         }
         return result;
     }
@@ -43,7 +44,7 @@ class CartContainer extends React.Component {
 CartContainer.propTypes = {
     cart: PropTypes.arrayOf(
         PropTypes.shape({
-            
+
         })
     ).isRequired
 }
@@ -53,5 +54,6 @@ const mapStateToProps = state => {
         cart: state.cart
     }
 }
+
 
 export default connect(mapStateToProps, null)(CartContainer);

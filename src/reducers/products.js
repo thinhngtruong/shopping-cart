@@ -19,7 +19,7 @@ var initialState = [
         rating: 5
     },
     {
-        id: 1,
+        id: 3,
         name: 'Xiaomi Redmi note 8',
         image: 'https://cdn.fptshop.com.vn/Uploads/Originals/2019/9/10/637037206354086148_xiaomi-redmi-note-8-pro-5.png',
         description: 'Xiaomi',

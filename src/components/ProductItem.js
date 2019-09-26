@@ -19,6 +19,11 @@ class ProductItem extends React.Component {
     }
     return result;
   }
+
+  addToCart = (product) => {
+    this.props.addToCart(product);    
+  }
+
   render() {
     var { product } = this.props
     return (
@@ -43,7 +48,9 @@ class ProductItem extends React.Component {
             <div className="card-footer">
               <span className="left">{product.price}</span>
               <span className="right">
-                <div className="btn-floating blue-gradient" data-toggle="tooltip" data-placement="top" data-original-title="Add to Cart">
+                <div className="btn-floating blue-gradient" data-toggle="tooltip" data-placement="top" 
+                data-original-title="Add to Cart"
+                onClick={() => this.addToCart(product)}>
                   <i className="fa fa-shopping-cart" />
                 </div>
               </span>

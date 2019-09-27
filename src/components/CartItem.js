@@ -1,11 +1,27 @@
 import React from 'react';
+import * as Message from './../constants/Message'
 
 class CartItem extends React.Component {
   showSubTotal = (price, quantity) => {
     return price*quantity;
   }
+
+  onDelete = (product) => {
+    var {deleteProductInCart, changeMessage} = this.props;
+    deleteProductInCart(product)
+    changeMessage(Message.MSG_DELETE_PRODUCT_IN_CART_SUCCESS)
+  }
+
+  onUpdateQuantity = (product, quantity) => {
+    if(quantity >0){
+      this.props.updateProductInCart(product, quantity);
+      this.props.changeMessage(Message.MSG_UPDATE_CART_SUCCESS)
+    }
+  }
+
   render(){
     var {item} = this.props;
+    var {quantity} = item
   return (
     <tr>
     <th scope="row">
@@ -18,23 +34,27 @@ class CartItem extends React.Component {
     </td>
     <td>{item.product.price}$</td>
     <td className="center-on-small-only">
-      <span className="qty">{item.quantity}</span>
+      <span className="qty">{quantity}</span>
       &nbsp;
       &nbsp;
       <div className="btn-group radio-group" data-toggle="buttons">
         <label className="btn btn-sm btn-primary
-                              btn-rounded waves-effect waves-light">
+                              btn-rounded waves-effect waves-light"
+                              onClick={() => this.onUpdateQuantity(item.product, item.quantity -1)}>
           —
         </label>
         <label className="btn btn-sm btn-primary
-                              btn-rounded waves-effect waves-light">
+                              btn-rounded waves-effect waves-light"
+                              onClick={() => this.onUpdateQuantity(item.product, item.quantity +1)}>
           +
         </label>
       </div>
     </td>
     <td>{this.showSubTotal(item.product.price, item.quantity)}$</td>
     <td>
-      <button type="button" className="btn btn-sm btn-primary waves-effect waves-light" data-toggle="tooltip" data-placement="top" data-original-title="Remove item">
+      <button type="button" className="btn btn-sm btn-primary waves-effect waves-light" 
+      data-toggle="tooltip" data-placement="top" data-original-title="Remove item"
+      onClick={() => this.onDelete(item.product)}>
         X
       </button>
     </td>
